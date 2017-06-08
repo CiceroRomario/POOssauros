@@ -1,7 +1,3 @@
-<?php
-require_once("_script/CategoriaDAO.php");
-?>
-
 <!DOCTYPE html>
 <html lan="pt-br">
 <head>
@@ -32,7 +28,9 @@ require_once("_script/CategoriaDAO.php");
             </button>
             <a class="navbar-brand" href="console.php">Sistema de Gerenciamento</a>
         </div>
-       	<!-- /navbar --> 
+
+       
+    	<!-- /navbar --> 
     </div>
     <!-- /container-fluid -->
 </div>
@@ -134,10 +132,10 @@ require_once("_script/CategoriaDAO.php");
                         <ul class="nav nav-stacked collapse <?php if(isset($menuAberto)){echo $menuAberto; $menuAberto = '';}?>" id="menuProdutos">
                             <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
                             <!-- Só mostra link de Cadastrar e Categorias se o usuário for Admin -->
-                            
+                            <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
                                 <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
                                 <li><a href="?page=ProdutosCategorias"><i class="glyphicon glyphicon-tags"></i> &nbsp;Categorias</a></li>
-                            
+                            <?php } ?>
                         </ul>
                 </li>
 
@@ -150,11 +148,35 @@ require_once("_script/CategoriaDAO.php");
                         
                         <ul class="nav nav-stacked collapse" id="menuClientes">
                             <li><a href="#"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
-                            
+                            <!-- Só mostra link de Cadastrar se o usuário for Admin -->
+                            <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                                <li><a href="#"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                            <?php } ?>
                         </ul>
                 </li>
-        <!-- FIM DOS MENUS DE CONFIGURAÇÕES -->
+
+
+                <!-- Menu Usuários -->
+                <li class="nav-header"><a href="#" data-toggle="collapse" data-target="#menuUsuario">
+                    <span class="glyphicon glyphicon-screenshot"></span> 
+                    <strong>Usuários</strong>
+                    <?php if( ($menu=='UsuariosConsultar') || ($menu=='UsuariosCadastrar') ){ ?>
+                        <i class="glyphicon glyphicon-chevron-up"></i></a> <?php
+                        $menuAberto = "in";
+                    }else{ ?>
+                        <i class="glyphicon glyphicon-chevron-down"></i></a>
+                    <?php } ?>
+                        
+                        <ul class="nav nav-stacked collapse <?php if(isset($menuAberto)){echo $menuAberto; $menuAberto = '';}?>" id="menuUsuario">
+                            <li><a href="?page=UsuariosConsultar"><i class="glyphicon glyphicon-search"></i> Consultar</a></li>
+                            <!-- Só mostra link de Cadastrar se o usuário for Admin -->
+                            <?php if( $_SESSION['permissao_usuario_logado'] == 1 ){  ?>
+                                <li><a href="?page=UsuariosCadastrar"><i class="glyphicon glyphicon-cog"></i> Cadastrar</a></li>
+                            <?php } ?>
+                    </ul>
+                </li>
+            </ul>
+            <!-- FIM DOS MENUS DE CONFIGURAÇÕES -->
 
         </div>
         <!-- FIM DO MENU LATERAL ESQUERDO -->
@@ -170,6 +192,12 @@ require_once("_script/CategoriaDAO.php");
                 {
                     case "ProdutosCategorias":
                         include('_paginas/categorias.php');
+                        break;
+                    case "UsuariosConsultar":
+                        include('_paginas/usuario_listagem.php');
+                        break;
+                    case "UsuariosCadastrar":
+                        include('_paginas/usuario_cadastrar.php');
                         break;
                     default:
                         include('_paginas/dashboard.php');

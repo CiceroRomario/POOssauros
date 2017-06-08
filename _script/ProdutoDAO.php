@@ -47,7 +47,7 @@ class ProdutoDAO{
  		public function inserir($produto){
 
  			/* Primeiro cria a query do MySQL */
- 			$insert_query =	"INSERT INTO produto (idproduto, nome, quantidade, custo, preco, descricao, idcategoria) VALUES (DEFAULT,'".$produto->nome."',".$produto->quantidade.",".$produto->custo.",".$produto->preco.",'".$produto->descricao."',".$produto->idcategoria.")";
+ 			$insert_query =	"INSERT INTO POOssauros.produto (idproduto, nome, quantidade, custo, preco, descricao, idcategoria) VALUES (DEFAULT,'".$produto->nome."',".$produto->quantidade.",".$produto->custo.",".$produto->preco.",'".$produto->descricao."',".$produto->idcategoria.")";
 			
 			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $insert_query)
@@ -59,7 +59,7 @@ class ProdutoDAO{
  		public function atualizar($produto){
  			
  			/* Primeiro cria a query do MySQL */
- 			$update_query =	"UPDATE produto SET nome = '".$produto->nome."', quantidade = ".$produto->quantidade.", custo = ".$produto->custo.", preco = ".$produto->preco.", descricao = '".$produto->admin."', idcategoria = ".$produto->idcategoria." WHERE idproduto = ".$produto->idproduto;
+ 			$update_query =	"UPDATE POOssauros.produto SET nome = '".$produto->nome."', quantidade = ".$produto->quantidade.", custo = ".$produto->custo.", preco = ".$produto->preco.", descricao = '".$produto->admin."', idcategoria = ".$produto->idcategoria." WHERE idproduto = ".$produto->idproduto;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $update_query)
@@ -71,7 +71,7 @@ class ProdutoDAO{
  		public function excluir($id){
 
  			/* Primeiro cria a query do MySQL */
- 			$delete_query = "DELETE FROM produto WHERE idproduto = " . $id;
+ 			$delete_query = "DELETE FROM POOssauros.produto WHERE idproduto = " . $id;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $delete_query)
@@ -83,7 +83,7 @@ class ProdutoDAO{
  		public function listar(){
 
  			/* Primeiro cria a query do MySQL */
- 			$list_query = "SELECT * FROM produto ORDER BY nome";
+ 			$list_query = "SELECT * FROM POOssauros.produto ORDER BY nome";
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $list_query)
@@ -116,7 +116,7 @@ class ProdutoDAO{
  		public function buscaPorId($id){
 
  			/* Primeiro cria a query do MySQL */
- 			$id_query = "SELECT * FROM produto WHERE idproduto = ".$id;
+ 			$id_query = "SELECT * FROM POOssauros.produto WHERE idproduto = ".$id;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $id_query)
@@ -147,7 +147,7 @@ class ProdutoDAO{
  		public function buscaPorNome($nome){
 
  			/* Primeiro cria a query do MySQL */
- 			$nome_query = "SELECT * FROM produto WHERE nome LIKE = '%".$nome."%' ORDER BY nome";
+ 			$nome_query = "SELECT * FROM POOssauros.produto WHERE nome LIKE = '%".$nome."%' ORDER BY nome";
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $nome_query)
@@ -180,7 +180,7 @@ class ProdutoDAO{
 		public function buscaPorCategoria($idcategoria){
 
  			/* Primeiro cria a query do MySQL */
- 			$id_query = "SELECT * FROM produto WHERE idcategoria = ".$idcategoria;
+ 			$id_query = "SELECT * FROM POOssauros.produto WHERE idcategoria = ".$idcategoria;
 
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $id_query)

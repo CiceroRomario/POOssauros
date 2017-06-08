@@ -20,23 +20,7 @@
 
 <div class="container" id="form-log-in">
 	<!-- Cria formulário de login na tela -->
-	<form action="_script/CategoriaProcessamento.php" method="post" role="form">
-
-		<!-- Verifica a existência de erro no processo de Login -->
-		<?php if(isset($_GET["ERRO"]) && $_GET["ERRO"] == "1"){ ?>
-			<div class="alert alert-danger" role="alert">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				ERROR!
-			</div>
-		<?php }else if(isset($_GET["ERRO"]) && $_GET["ERRO"] == "2"){ ?>
-			<div class="alert alert-danger" role="alert">
-				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only">Error:</span>
-				BEM VINDO!!
-			</div>
-		<?php } ?>
-                
+        <form action="_style/console.php" method="post" role="form">
                 
 		<!-- Botão de login -->
 		<div class="text-center">

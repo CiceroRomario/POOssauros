@@ -43,12 +43,12 @@ if( isset($_GET["excluir"]) ){
 	<fieldset id="categorias"><legend>Categorias Cadastradas</legend>
 		<table>
 			<tr>
-				<td>
+				
 				<?php
 					/* Este método gera uma lista do tipo <select> do HTML */
 					$categoriaDao->selectOption();
 				?>
-				</td>
+				
 				<!-- Botão Editar -->
 				<td>&nbsp;&nbsp;&nbsp;
 					<input type="submit" id="idEditar" name="nEditar" value="Editar" /></td>

@@ -24,7 +24,8 @@
 		</tr>
 		<!-- Busca todos produtos cadastrados no banco-->
 		<?php  
-			$produtoDao = new ProdutoDAO();
+			include '_script/ProdutoDAO.php';
+                        $produtoDao = new ProdutoDAO();
 			$lista = $produtoDao->listar();
 		?>
 			<tr>

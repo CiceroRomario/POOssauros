@@ -38,7 +38,7 @@ class CategoriaDAO{
  		/*Função para inserir nova categoria na tabela categorias do banco de dados*/
  		public function inserir($categoria){
  			/* Primeiro cria a query SQL */
- 			$insert_query =	"INSERT INTO poossauros.categorias (idcategoria, nome, idpai) VALUES (DEFAULT, '".$categoria->nome."', ".$categoria->idpai.")";
+ 			$insert_query =	"INSERT INTO POOssauros.categorias (idcategoria, nome, idpai) VALUES (DEFAULT, '".$categoria->nome."', ".$categoria->idpai.")";
 			
 			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $insert_query)
@@ -48,7 +48,7 @@ class CategoriaDAO{
  		public function atualizar($categoria){
  			
  			/* Primeiro cria a query SQL */
- 			$update_query =	"UPDATE poossauros.categorias SET nome = '".$categoria->nome."', idpai = ".$categoria->idpai." WHERE idcategoria = ".$categoria->idcategoria;
+ 			$update_query =	"UPDATE POOssauros.categorias SET nome = '".$categoria->nome."', idpai = ".$categoria->idpai." WHERE idcategoria = ".$categoria->idcategoria;
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $update_query)
 			or die("Erro ao atualizar categoria: " . mysql_error() );
@@ -58,7 +58,7 @@ class CategoriaDAO{
  		public function atualizarNome($categoria){
  			
  			/* Primeiro cria a query SQL */
- 			$update_query =	"UPDATE poossauros.categorias SET nome = '".$categoria->nome."' WHERE idcategoria = ".$categoria->idcategoria;
+ 			$update_query =	"UPDATE POOssauros.categorias SET nome = '".$categoria->nome."' WHERE idcategoria = ".$categoria->idcategoria;
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $update_query)
 			or die("Erro ao atualizar nome da categoria: " . mysql_error() );
@@ -67,13 +67,13 @@ class CategoriaDAO{
  		/* Função para excluir uma categoria e suas subcategorias do banco de dados */
  		public function excluir($id){
  			/* Cria primeira query SQL para excluir categoria repassada como argumento*/
- 			$delete_query = "DELETE FROM poossauros.categorias WHERE idcategoria = ".$id;
+ 			$delete_query = "DELETE FROM POOssauros.categorias WHERE idcategoria = ".$id;
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $delete_query)
 			or die("Erro ao excluir categoria primaria: " . mysql_error() );
 			/* Cria segunda query SQL para excluir subcategorias (se houver)
 			 * Se não haver subcategorias, não surte efeito nenhum */
- 			$delete_query = "DELETE FROM poossauros.categorias WHERE idpai = ".$id;
+ 			$delete_query = "DELETE FROM POOssauros.categorias WHERE idpai = ".$id;
  			/* Envia a query para o banco de dados e verifica se funcionou */
 			mysqli_query($this->conexao, $delete_query)
 			or die("Erro ao excluir subcategorias: " . mysql_error() );
@@ -81,7 +81,7 @@ class CategoriaDAO{
  		/* Função que lista todas as categorias existentes na tabela */
  		public function listar(){
  			//Faz acesso ao banco de dados
- 			$list_query = "SELECT * FROM poossauros.categorias";
+ 			$list_query = "SELECT * FROM POOssauros.categorias";
  			$result = mysqli_query($this->conexao, $list_query) or die("Erro ao listar categorias: " . mysql_error() );
  			/* Cria um array que receberá as linhas da tabela */
  			$lista = array();
@@ -106,7 +106,7 @@ class CategoriaDAO{
  			if(!$id) $id = 0;
  			if(!$nivel) $nivel = 0;
  			//Faz acesso ao banco de dados
- 			$query = "SELECT * FROM poossauros.categorias WHERE idpai = ".$id;
+ 			$query = "SELECT * FROM POOssauros.categorias WHERE idpai = ".$id;
  			$result = mysqli_query($this->conexao, $query) or die("Erro ao criar lista de categorias: " . mysql_error() );
  			//Laço iterativo e recursivo
  			$i = 0;
@@ -157,7 +157,7 @@ class CategoriaDAO{
  		/* Função que diz se a categoria tem pelo menos uma subcategoria */
  		public function possuiSubCat($id){
  			
- 			$query = "SELECT * FROM poossauros.categorias WHERE idpai = ".$id;
+ 			$query = "SELECT * FROM POOssauros.categorias WHERE idpai = ".$id;
  			$result = mysqli_query($this->conexao, $query) or die("Erro ao verificar se categoria possui subcategorias: " . mysql_error() );
  			if( $row = mysqli_fetch_array($result, MYSQLI_ASSOC) )
  				return true;
@@ -168,7 +168,7 @@ class CategoriaDAO{
  		/* Função que busca uma entrada na tabela Categorias e retorna o array preenchido com campos associados */
  		public function buscaPorId($id){
  			/* Primeiro cria a query SQL */
- 			$id_query = "SELECT * FROM poossauros.categorias WHERE idcategoria = ".$id;
+ 			$id_query = "SELECT * FROM POOssauros.categorias WHERE idcategoria = ".$id;
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $id_query)
  			or die("Erro ao buscar categorias por ID: " . mysql_error() );
@@ -188,7 +188,7 @@ class CategoriaDAO{
  		/* Função que busca categorias de acordo com o ID da categoria pai */
  		public function buscaPorIdPai($idpai){
  			/* Primeiro cria a query SQL */
- 			$idpai_query = "SELECT * FROM poossauros.categorias WHERE idpai = ".$idpai." ORDER BY nome";
+ 			$idpai_query = "SELECT * FROM POOssauros.categorias WHERE idpai = ".$idpai." ORDER BY nome";
  			/* Envia a query para o banco de dados e verifica se funcionou */
  			$result = mysqli_query($this->conexao, $idpai_query)
  			or die("Erro ao listar categorias por ID do pai: " . mysql_error() );
@@ -213,7 +213,7 @@ class CategoriaDAO{
 		public function verificaProdutosRelacionados($idcategoria){
 			/* Primeiro verifica se a categoria selecionada é primária */
 			/* Para tanto, pega somente o campo do idpai */
-			$query = "SELECT idpai FROM poossauros.categorias WHERE idcategoria = ".$idcategoria;
+			$query = "SELECT idpai FROM POOssauros.categorias WHERE idcategoria = ".$idcategoria;
  			$result = mysqli_query($this->conexao, $query)
  			or die("Erro ao buscar idpai da categoria repassada: " . mysql_error() );			
  			/* Salva o idpai da categoria consultada */
@@ -226,7 +226,7 @@ class CategoriaDAO{
  			 * Caso não encontre nenhum, passa a buscar em suas subcategorias */
  			if( $cat_idpai["idpai"] == 0 ) {
 				/* Esta query busca produtos relacionados diretamente com a categoria primária */
- 				$query = "SELECT idproduto FROM poossauros.produto WHERE idcategoria = ".$idcategoria;
+ 				$query = "SELECT idproduto FROM POOssauros.produto WHERE idcategoria = ".$idcategoria;
 		 		$result = mysqli_query($this->conexao, $query)
 		 		or die("Erro ao buscar produtos cadastrado diretamente na categoria primaria: " . mysql_error() );
 		 		/* Varre o resultado por linhas e armazena no array os IDs dos produtos relacionados */
@@ -236,7 +236,7 @@ class CategoriaDAO{
 	 			 * Deve então procurar em suas subcategorias */
 	 			if( $id_prod_rel == null ){
 	 				/* Esta query busca o ID de todas as subcategorias existentes naquela categoria */
-	 				$query = "SELECT idcategoria FROM poossauros.categorias WHERE idpai = ".$idcategoria;
+	 				$query = "SELECT idcategoria FROM POOssauros.categorias WHERE idpai = ".$idcategoria;
 		 			$result = mysqli_query($this->conexao, $query)
 		 			or die("Erro ao buscar ID das subcategorias: " . mysql_error() );
 		 			/* Cria array para armazenar os IDs das subcategorias encontradas */
@@ -249,7 +249,7 @@ class CategoriaDAO{
 		 				/* Loop para fazer pesquisa por produtos cadastrados nas subcategorias encontradas */
 		 				foreach ($sub_cats_id as $key => $id_subcat){
 		 					/* Esta query pega todos produtos relacionados à subcategoria em análise */
-		 					$query = "SELECT idproduto FROM poossauros.produto WHERE idcategoria = ".$id_subcat;
+		 					$query = "SELECT idproduto FROM POOssauros.produto WHERE idcategoria = ".$id_subcat;
 				 			$result = mysqli_query($this->conexao, $query)
 				 			or die("Erro ao buscar produtos relacionados as subcategorias: " . mysql_error() );
 							
@@ -263,7 +263,7 @@ class CategoriaDAO{
  			/* Se for somente uma subcategoria ($cat_idpai["idpai"] != 0), busca relação somente com ela mesma */ 
  			else{
  				/* Esta query busca produtos relacionados diretamente com uma subcategoria */
- 				$query = "SELECT idproduto FROM poossauros.produto WHERE idcategoria = ".$idcategoria;
+ 				$query = "SELECT idproduto FROM POOssauros.produto WHERE idcategoria = ".$idcategoria;
 		 		$result = mysqli_query($this->conexao, $query)
 		 		or die("Erro ao buscar produtos cadastrado diretamente na subcategooria: " . mysql_error() );
 		 		/* Varre o resultado por linhas e armazena no array os IDs dos produtos relacionados */
@@ -275,10 +275,11 @@ class CategoriaDAO{
  		/* Cria um objeto <select> do HTML com todas categorias e subcategorias, indentadas e numeradas
  		 * Recebe o ID da categoria que deseja-se deixar pré-selecionada */
  		public function selectOption($selected){
+
  			/* Abre tag HTML do select */
 			echo "<select id='idSelect' name='nSelect'>";
 			/* Cria primeira query para descobrir todas as categorias primarias (idpai = 0)*/
-			$query1 = "SELECT idcategoria, nome FROM poossauros.categorias WHERE idpai = 0 ORDER BY nome";
+			$query1 = "SELECT idcategoria, nome FROM POOssauros.categorias WHERE idpai = 0 ORDER BY nome";
  			$cats_1 = mysqli_query($this->conexao, $query1)
  			or die("Erro ao listar categorias primarias: " . mysql_error() );
  			/* Cria uma opção na lista que ficará habilitada por default caso nenhum ID tenha sido passado 
@@ -286,10 +287,7 @@ class CategoriaDAO{
  			if( $selected == 0 || $select == null ){ ?> 
  				<option disabled selected>-- Selecione uma categoria --</option>
  			<?php }
- 			/* Entra em um laço para imprimir as opções dentro do select
- 			 * Também efetua uma nova query que buscará scateubgorias das categorias primárias
- 			 * Exemplo: resistor -> filme metálico
- 			 * Exemplo: capacitor -> poliéster */
+ 			
  			$i = 1;
  			$j = 1;
  			while( $row1 = mysqli_fetch_array($cats_1, MYSQLI_ASSOC) ){ ?>
@@ -298,7 +296,7 @@ class CategoriaDAO{
 				
 				<?php 
 				/* Agora busca por subcategorias que possuam o id da categoria como idpai */
-				$query2 = "SELECT idcategoria, nome FROM poossauros.categorias WHERE idpai = ".$row1["idcategoria"]." ORDER BY nome";
+				$query2 = "SELECT idcategoria, nome FROM POOssauros.categorias WHERE idpai = ".$row1["idcategoria"]." ORDER BY nome";
 	 			$cats_2 = mysqli_query($this->conexao, $query2)
 	 			or die("Erro ao listar subcategorias: " . mysql_error() );
 	 			/* Varre o array de subcategorias encontradas e as coloca na lista identadas e numeradas */

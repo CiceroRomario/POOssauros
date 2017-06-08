@@ -9,7 +9,8 @@
 <div id="interface">
 
 	<h1>Cadastrar Categorias</h1>
-
+        <form action="_script/CategoriaDAO.php" method="post" role="form"></form>
+     
 
 </div>
 </body>
